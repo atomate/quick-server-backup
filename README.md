@@ -29,6 +29,8 @@ Make the script executable by running
 Configuration reference
 -------------
 
+#### GENERAL
+
 SERVER
 BACKDIR
 HOST
@@ -40,17 +42,17 @@ FILES
 PROJECTS
 FTP=y
 
-# FTP server settings; should be self-explanatory
+#### FTP
 FTPHOST="backup.server.com"
 FTPUSER="user"
 FTPPASS="pass"
 
-#TODO : FOLDER
+#### FOLDER
 # directory to backup to. if it doesn't exist, file will be uploaded to 
 # first logged-in directory
 FTPDIR="backups"
 
-#TODO : EMAIL
+#### EMAIL
 MAIL=y
 EMAIL="mail@mail.com"
 SUBJECT="Backup on $SERVER ($DATE)"
@@ -58,7 +60,7 @@ SUBJECT="Backup on $SERVER ($DATE)"
 BODYFTPSCC="Your backup is completed localy! Files are uploaded to FTP server."
 BODYFTPERR="Your backup is completed localy! Error uploading to FTP."
 
-# delete old files?
+#### DELETE
 DELETE=y
 
 # how many days of backups do you want to keep?
