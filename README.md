@@ -31,40 +31,39 @@ Configuration reference
 
 #### GENERAL
 
-SERVER
-BACKDIR
-HOST
-USER=user
-PASS=password
-DBS
-DUMPALL
-FILES
-PROJECTS
-FTP=y
+- SERVER
+- BACKDIR
+- HOST
+- USER=user
+- PASS=password
+- DBS
+- DUMPALL
+- FILES
+- PROJECTS
+- FTP=y
 
 #### FTP
-FTPHOST="backup.server.com"
-FTPUSER="user"
-FTPPASS="pass"
+- FTPHOST="backup.server.com"
+- FTPUSER="user"
+- FTPPASS="pass"
 
 #### FOLDER
-# directory to backup to. if it doesn't exist, file will be uploaded to 
-# first logged-in directory
-FTPDIR="backups"
+directory to backup to. if it doesn't exist, file will be uploaded to 
+first logged-in directory
+- FTPDIR="backups"
 
 #### EMAIL
-MAIL=y
-EMAIL="mail@mail.com"
-SUBJECT="Backup on $SERVER ($DATE)"
+- MAIL=y
+- EMAIL="mail@mail.com"
+- SUBJECT="Backup on $SERVER ($DATE)"
 
-BODYFTPSCC="Your backup is completed localy! Files are uploaded to FTP server."
-BODYFTPERR="Your backup is completed localy! Error uploading to FTP."
+- BODYFTPSCC="Your backup is completed localy! Files are uploaded to FTP server."
+- BODYFTPERR="Your backup is com  spleted localy! Error uploading to FTP."
 
 #### DELETE
-DELETE=y
+- DELETE=y
 
-# how many days of backups do you want to keep?
-DAYS=15
-DAYSLOCAL=1
-RMDATE=$(date +"%Y-%m-%d" -d "$DAYS days ago")
-RMDATELOCAL=$(date +"%Y-%m-%d" -d "$DAYSLOCAL days ago")
+- DAYS=15
+- DAYSLOCAL=1
+- RMDATE=$(date +"%Y-%m-%d" -d "$DAYS days ago")
+- RMDATELOCAL=$(date +"%Y-%m-%d" -d "$DAYSLOCAL days ago")
