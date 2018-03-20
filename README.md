@@ -4,12 +4,12 @@ Backup Bash Script
 Overview
 -------------
 
-This is a quick bash script to backup all your websites and databases from a single serve to a remote FTP location. 
+This is a quick bash script to backup all your websites files and `mysql` databases from a single serve to a remote `FTP` location. 
 
 Requirements
 -------------
 
-To use this script you will need ssh access to the server and access to an FTP.
+To use this script you will need `ssh` access to the server and access to an `FTP`.
 
 - SSH access to server with ability to use cron
 - FTP location to store backups
@@ -18,7 +18,7 @@ To use this script you will need ssh access to the server and access to an FTP.
 How to use
 -------------
 
-It is usually best to set it up with cron, similar to this
+It is usually best to set it up with `cron`, similar to this
 
 ``30 3 * * * /home/user/bin/backup.sh``
 
@@ -46,10 +46,10 @@ Configuration reference
 - FTPHOST="backup.server.com"
 - FTPUSER="user"
 - FTPPASS="pass"
+- FTP_SUCCESS_MSG
 
 #### FOLDER
-directory to backup to. if it doesn't exist, file will be uploaded to 
-first logged-in directory
+directory to backup; if it doesn't exist, file will be uploaded to first logged-in directory
 - FTPDIR="backups"
 
 #### EMAIL
@@ -64,6 +64,9 @@ first logged-in directory
 - DELETE=y
 
 - DAYS=15
-- DAYSLOCAL=1
+- DAYSLOCAL=15
 - RMDATE=$(date +"%Y-%m-%d" -d "$DAYS days ago")
 - RMDATELOCAL=$(date +"%Y-%m-%d" -d "$DAYSLOCAL days ago")
+
+## !!! Notice
+_The script works properly only if it runs everyday._

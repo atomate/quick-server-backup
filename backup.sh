@@ -1,13 +1,12 @@
 #! /bin/bash
 
 # Backup Bash Script
-# for once per day backup
-# v.1.0.1
+# v.1.1.0
 # Atomate Limited
 # info@atomate.net
 
 
-#TODO : SERVER NAME (ANYTHING)
+# SERVER NAME (ANYTHING)
 # your server's name
 SERVER=AT_SERVER
 
@@ -19,15 +18,13 @@ BACKDIR=~/backups
 
 #----------------------MySQL Settings--------------------#
 
-# your MySQL server's location (IP address is best)
-HOST=127.0.0.1
-
-#TODO : MYSQL DATA
 # MySQL
+# your MySQL server's location
+HOST=127.0.0.1
 USER=user
 PASS=password
 
-# List all of the MySQL databases that you want to backup in here, 
+# list all of the MySQL databases that you want to backup in here, 
 # each separated by a space
 DBS="my_db"
 
@@ -37,31 +34,34 @@ DUMPALL=y
 
 #----------------------FILE Path Settings--------------#
 
-#TODO : SETTING UP FILES
+# SETTING UP FILES
 # set to 'y' if you want to backup files (set to 'n' to skip)
 FILES=y
-#set projects paths, each separated by comma
+# set projects paths, each separated by comma
 PROJECTS="/var/www/project1,/var/www/project2"
 
 #----------------------FTP Settings--------------------#
 
-#TODO : FTP
+# FTP
 # set "FTP=y" if you want to enable FTP backups
 FTP=y
 
-# FTP server settings; should be self-explanatory
+# FTP server settings
 FTPHOST="backup.server.com"
 FTPUSER="user"
 FTPPASS="pass"
 
-#TODO : FOLDER
-# directory to backup to. if it doesn't exist, file will be uploaded to 
-# first logged-in directory
+# directory to backup; if it doesn't exist, file will be uploaded to 
+# first logged in directory
 FTPDIR="backups"
+
+# check ftp logs for success message, 
+# different clients have different messages
+FTP_SUCCESS_MSG="226-File successfully transferred"
 
 #----------------------Mail Settings--------------------#
 
-#TODO : EMAIL
+# EMAIL
 # set to 'y' if you'd like to be emailed (requires mutt)
 MAIL=y
 EMAIL="mail@mail.com"
@@ -77,7 +77,7 @@ DELETE=y
 
 # how many days of backups do you want to keep?
 DAYS=15
-DAYSLOCAL=1
+DAYSLOCAL=15
 RMDATE=$(date +"%Y-%m-%d" -d "$DAYS days ago")
 RMDATELOCAL=$(date +"%Y-%m-%d" -d "$DAYSLOCAL days ago")
 
@@ -124,7 +124,14 @@ done
 
 
 cd ${BACKDIR}
-mkdir logs
+
+
+if  [ -e logs ]
+then
+	echo logs directory already exists
+else
+	mkdir logs
+fi
 
 
 if [ ${FILES} = "y" ]
@@ -153,9 +160,8 @@ echo Uploading ${SERVER}_${DATE}.tar.gz ...
 echo Deleting ${SERVER}_${RMDATE}.tar.gz ...
 echo Connecting ...
 
-    touch logs/${SERVER}_ftplog.txt
-    FTPLOG=logs/${SERVER}_ftplog.txt
-	FTP_SUCCESS_MSG="226 Transfer complete"
+    touch logs/${SERVER}_${DATE}_ftplog.txt
+    FTPLOG=logs/${SERVER}_${DATE}_ftplog.txt
 
 	ftp -nv <<EOF > ${FTPLOG}
 	open ${FTPHOST}
